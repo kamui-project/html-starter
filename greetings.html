@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Greetings - HTML Starter</title>
+    <link rel="icon" type="image/png" href="static/logo.png">
+    <meta property="og:image" content="static/og.png">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="greetings.html">Greetings</a>
+    </nav>
+    <div class="container">
+        <h1>Greetings</h1>
+        <div class="card">
+            <form id="greeting-form">
+                <input type="text" id="message-input" placeholder="Enter a message" required>
+                <button type="submit">Send</button>
+            </form>
+            <p id="empty-state">No messages yet.</p>
+            <ul id="greeting-list"></ul>
+        </div>
+    </div>
+    <script>
+        const greetings = [];
+        const form = document.getElementById("greeting-form");
+        const input = document.getElementById("message-input");
+        const list = document.getElementById("greeting-list");
+        const empty = document.getElementById("empty-state");
+
+        function render() {
+            if (greetings.length === 0) {
+                empty.style.display = "block";
+                list.innerHTML = "";
+                return;
+            }
+            empty.style.display = "none";
+            list.innerHTML = greetings.map(function (g) {
+                return '<li>' + g.message + ' <span class="time">' + g.time + '</span></li>';
+            }).join("");
+        }
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            var message = input.value.trim();
+            if (!message) return;
+            var now = new Date();
+            var time = now.getFullYear() + "-" +
+                String(now.getMonth() + 1).padStart(2, "0") + "-" +
+                String(now.getDate()).padStart(2, "0") + " " +
+                String(now.getHours()).padStart(2, "0") + ":" +
+                String(now.getMinutes()).padStart(2, "0");
+            greetings.unshift({ message: message, time: time });
+            input.value = "";
+            render();
+        });
+
+        render();
+    </script>
+</body>
+</html>
