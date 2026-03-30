@@ -2,6 +2,8 @@
 
 A static HTML sample application for [Kamui Platform](https://kamui-platform.com)
 
+Please refer to the [documentation for Static app](https://docs.kamui-platform.com/gui/apps/static.html).
+
 ## Local Development
 
 Open `index.html` in your browser.
